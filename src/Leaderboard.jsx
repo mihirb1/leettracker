@@ -1,7 +1,8 @@
-import './Leaderboard.css';
-import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import "./Leaderboard.css";
+import { useEffect, useState } from "react";
 
-const usernames = ['mihirborkar2004', 'chrehall68', 'someone2003'];
+const usernames = ["mihirborkar2004", "chrehall68", "someone2003"];
 
 const Leaderboard = () => {
   const [data, setData] = useState([]);
@@ -10,14 +11,21 @@ const Leaderboard = () => {
     const fetchAllData = async () => {
       const promises = usernames.map(async (username) => {
         try {
-          const res = await fetch(`https://leetcode-api-faisalshohag.vercel.app/${username}`);
+          const res = await fetch(
+            `https://leetcode-api-faisalshohag.vercel.app/${username}`,
+          );
           const json = await res.json();
 
-          const recentAccepted = (json.recentSubmissions || []).filter(sub => {
-            const date = new Date(parseInt(sub.timestamp) * 1000);
-            const submissionDate = date.toISOString().slice(0, 10);
-            return sub.statusDisplay === 'Accepted' && submissionDate >= '2025-05-31';
-          });
+          const recentAccepted = (json.recentSubmissions || []).filter(
+            (sub) => {
+              const date = new Date(parseInt(sub.timestamp) * 1000);
+              const submissionDate = date.toISOString().slice(0, 10);
+              return (
+                sub.statusDisplay === "Accepted" &&
+                submissionDate >= "2025-05-31"
+              );
+            },
+          );
 
           const difficultyMap = {
             "two-sum": "Easy",
@@ -40,17 +48,17 @@ const Leaderboard = () => {
             "search-in-rotated-sorted-array": "Medium",
             "course-schedule": "Medium",
             "maximum-depth-of-binary-tree": "Easy",
-            "diameter-of-binary-tree": "Easy"
+            "diameter-of-binary-tree": "Easy",
           };
 
           const difficultyCount = {
             Easy: 0,
             Medium: 0,
-            Hard: 0
+            Hard: 0,
           };
 
-          recentAccepted.forEach(sub => {
-            const difficulty = difficultyMap[sub.titleSlug] || 'Medium';
+          recentAccepted.forEach((sub) => {
+            const difficulty = difficultyMap[sub.titleSlug] || "Medium";
             if (difficultyCount[difficulty] !== undefined) {
               difficultyCount[difficulty]++;
             }
@@ -61,7 +69,10 @@ const Leaderboard = () => {
             easy: difficultyCount.Easy,
             medium: difficultyCount.Medium,
             hard: difficultyCount.Hard,
-            total: difficultyCount.Easy + difficultyCount.Medium + difficultyCount.Hard
+            total:
+              difficultyCount.Easy +
+              difficultyCount.Medium +
+              difficultyCount.Hard,
           };
         } catch (err) {
           console.error(`Failed to fetch for ${username}:`, err);
@@ -70,7 +81,7 @@ const Leaderboard = () => {
             easy: 0,
             medium: 0,
             hard: 0,
-            total: 0
+            total: 0,
           };
         }
       });
@@ -98,7 +109,15 @@ const Leaderboard = () => {
         <tbody>
           {data.map((user, idx) => (
             <tr key={idx}>
-              <td>{user.username}</td>
+              <td>
+                <Link
+                  to={{
+                    pathname: `/progress/${user.username}`,
+                  }}
+                >
+                  {user.username}
+                </Link>
+              </td>
               <td>{user.easy}</td>
               <td>{user.medium}</td>
               <td>{user.hard}</td>
