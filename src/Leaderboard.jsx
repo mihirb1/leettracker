@@ -73,6 +73,7 @@ const Leaderboard = () => {
               difficultyCount.Easy +
               difficultyCount.Medium +
               difficultyCount.Hard,
+            points: difficultyCount.Easy * 1 + difficultyCount.Medium * 3 + difficultyCount.Hard * 5,
           };
         } catch (err) {
           console.error(`Failed to fetch for ${username}:`, err);
@@ -82,11 +83,13 @@ const Leaderboard = () => {
             medium: 0,
             hard: 0,
             total: 0,
+            points: 0,
           };
         }
       });
 
       const results = await Promise.all(promises);
+      results.sort((a, b) => b.points - a.points);
       setData(results);
     };
 
@@ -104,6 +107,7 @@ const Leaderboard = () => {
             <th>Medium</th>
             <th>Hard</th>
             <th>Total Solved</th>
+            <th>Points</th>
           </tr>
         </thead>
         <tbody>
@@ -122,6 +126,7 @@ const Leaderboard = () => {
               <td>{user.medium}</td>
               <td>{user.hard}</td>
               <td>{user.total}</td>
+              <td>{user.points}</td>
             </tr>
           ))}
         </tbody>
