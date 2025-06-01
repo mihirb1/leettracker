@@ -1,0 +1,60 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 5vw;
+    background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #ddd; /* light grey border */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05); /* soft shadow */
+}
+
+.title {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #222;
+}
+
+/* Wrap progress and login in a right-group div if possible for cleaner layout */
+.progress,
+.login {
+    font-size: 1em;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 8px 16px;
+    background-color: #e0e7ff; /* soft blue background */
+    color: #1e40af;            /* deep blue text */
+    border-radius: 12px;
+    border: 1px solid #cbd5e1; /* light border */
+    margin-left: 1vw;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.progress:hover,
+.login:hover {
+    background-color: #dbeafe; /* lighter on hover */
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 5vw;
+        height: auto;
+        gap: 0.5rem;
+    }
+
+    .progress,
+    .login {
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,32 @@
+.log {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 500px; /* Slightly wider */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 2.5rem;
+    font-size: 1.1em;
+    color: #333;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-weight: bold;
+}
+
+.log-title {
+    font-size: 1.8rem;       /* Bigger title */
+    margin-bottom: 2rem;     /* More space below title */
+}
+
+.input {
+    background-color: white;
+    color: black;
+    font-size: 1.1rem;        /* Bigger input text */
+    padding: 0.75rem 1rem;    /* Taller input box */
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
